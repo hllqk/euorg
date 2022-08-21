@@ -2,11 +2,12 @@ module.exports = {
     title: 'HLLQK文档',  // 文档标题，左上角显示
     description: 'hllqk文档合集',
     base: '/', // 这里写你的仓库名称
+		publicPath: './',
     head: [
         ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/jyjwebdocs/favicon.ico` }]
     ], //这里配置你的网页头部信息等
     themeConfig: {
-		sidebarDepth: 2,
+		sidebarDepth : 2,
 		displayAllHeaders: true, // 默认值：false
 		nav: [
             { text: '首页', link: '/' },
@@ -19,11 +20,11 @@ module.exports = {
                 ]
             }
         ],
-    sidebar:  
-							[
-								'/',
-                '/guide/',
-								'/guide/api/'
-								]
-		}
+    sidebar:
+	[
+							'/',
+              '/guide/',
+							'/guide/api/'
+							],
+}
 }
