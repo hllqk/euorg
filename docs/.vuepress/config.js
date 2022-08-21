@@ -1,7 +1,7 @@
 module.exports = {
     title: 'HLLQK文档',  // 文档标题，左上角显示
     description: 'hllqk文档合集',
-    base: '/hllqk-docs-euorg/', // 这里写你的仓库名称
+    base: '/', // 这里写你的仓库名称
 		publicPath: './',
     head: [
         ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/jyjwebdocs/favicon.ico` }]
