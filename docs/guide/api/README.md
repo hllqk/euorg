@@ -1,3 +1,6 @@
+---
+sidebarDepth: 2
+---
 # SetuAPI
 
 **数据库在release里**
