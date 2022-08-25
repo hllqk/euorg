@@ -26,7 +26,7 @@ module.exports = {
               '/guide/',
 							'/guide/api/',
               '/guide/jojo/',
-              '../colorpicker/'
+              '/colorpicker/'
 							],
 }
 }
