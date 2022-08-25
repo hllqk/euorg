@@ -1,66 +1,101 @@
-# 1
+# SetuAPI
 
-## 2
+**数据库在release里**
 
-### 3
+API: https://setu.yuban10703.xyz/setu
 
-#### 4
+请求方法:GET,POST
 
-##### 5
+返回数据为JSON
 
-###### 6
+### API文档地址
 
-* 3
-* 2
-* 1
+https://setu.yuban10703.xyz/docs
 
-1. 测试
-2. 哈哈哈
+### 请求字段
 
-* [x] 玩原神
-* [ ] 看b站
-* [x] 学习
+| 字段   | 类型      | 说明                                                      |
+|------|---------|---------------------------------------------------------|
+| r18  | integer | 0:性感,1:色情,2:all                                         |
+| num  | integer | 数量,最大50                                                 |
+| tags | array[string] | 可以传入多个tag                                               |
+| replace_url | HttpUrl | 反代的链接,用于替换默认的https://i.pximg.net  例如https://i.pixiv.cat |
 
-~~删除~~
+### **返回数据**
 
-🙂 😦 😍 😍 😎 😭 😊
+| 字段名 | 数据类型 | 说明 |
+| ------ | -------- | ---- |
+| detail | string  | 没东西就是正常 |
+| tags | array[string]  | 你请求的时候发送的tags |
+| count | integer  | data内的数据数量 |
+| data | array[setu] | setu列表 |
 
----
+### **setu**
 
-```html
-<!DOCTYPE html>
-<html lang="en">
+| 字段名 | 数据类型 | 说明 |
+| ------ | -------- | ---- |
+| artwork |  array[artwork] | 画廊的标题和P站id |
+| author | array[author] | 作者的名字和P站ID |
+| count | integer  | 获取到的数量 |
+| sanity_level | integer | P站给的字段 可能是色情等级吧|
+|  r18  |  boolean  |  是否R18 |
+| page |  integer  |   作品在画廊的第几P(从0开始算)  |
+|  create_date |  string($date-time)  | P站的字段 应该是最后更新日期 |
+| size | array[size] | 图片的长宽 |
+| tags | array[string]  | 图片的标签 |
+| urls | array[urls] | 图片的链接 |
 
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="canonical" href="https://github.com/Qexo/Qexo">
+### **artwork**
 
-    <title>
-        Hexo管理面板 -  编辑文章: cs.md 
-    </title>
-```
+| 字段名 | 数据类型 | 说明        |
+| ------ | -------- | ----------- |
+| title  | string   | 作品标题    |
+| id     | integer  | 作品的P站ID |
 
-| col1 | col2 | col3 |
-| ---- | ---- | ---- |
-| 1    | 3    | 5    |
-| 2    | 4    | 6    |
+### **author**
 
-链接:
+| 字段名 | 数据类型 | 说明        |
+| ------ | -------- | ----------- |
+| name   | string   | 作者名字    |
+| id     | integer  | 作者的P站ID |
 
-[Font Awesome 中文网 – | 字体图标](http://www.fontawesome.com.cn/)
+### **size**
 
-[水啊的博客](http://shui.tk)
+| 字段名 | 数据类型 | 说明 |
+| ------ | -------- | ---- |
+| width  | integer  | 宽   |
+| height | integer  | 高   |
 
-> 引用
+### **urls**
 
-*斜体*
+| 字段名   | 数据类型     | 说明     |
+| -------- | ------------ | -------- |
+| original | string($uri) | 链接(画质:original) |
+| large    | string($uri) | 链接(画质:large)   |
+| medium   | string($uri) | 链接(画质:medium)  |
 
-**加粗**
+### docker
 
-图片:
+~~~
+docker build -t setuapi:v1.7 .
+~~~
 
-![https://cloud.shuia.tk/Qexo/2022/8/ee6c8423f359f7d162c09b607d61111b.jpg](https://cloud.shuia.tk/Qexo/2022/8/ee6c8423f359f7d162c09b607d61111b.jpg)
+~~~
+docker run -d \
+-p 9001:80 \
+-e mongodb="mongodb+srv://username:password@cludn.mongodb.net/setu?retryWrites=true&w=majority" \
+-e db="setu" \
+-e col="setu_v5" \
+-e LOG_LEVEL="debug" \
+setuapi:v1.7
+~~~
 
-end
+### mongodb
 
+要给r18,tags字段分别建索引
+
+### 感谢
+
+https://cloud.mongodb.com
+
+https://vercel.com
